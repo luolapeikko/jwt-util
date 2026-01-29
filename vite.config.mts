@@ -4,7 +4,7 @@ import {defineConfig} from 'vitest/config';
 
 export default defineConfig({
 	test: {
-		reporters: process.env.GITHUB_ACTIONS ? ['github-actions', 'junit'] : ['verbose', 'github-actions', 'junit'],
+		reporters: ['verbose', 'github-actions', 'junit'],
 		outputFile: {
 			junit: './test-results.xml',
 		},
