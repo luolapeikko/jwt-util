@@ -1,10 +1,7 @@
 {
 	"version": "0.2",
 	"language": "en",
-	"enableFiletypes": [
-		"markdown",
-		"typescript"
-	],
+	"enableFiletypes": ["markdown", "typescript"],
 	"ignorePaths": [
 		".cspell.json",
 		".github/workflows/**",
@@ -15,15 +12,6 @@
 		"**/fixtures/**",
 		"**/node_modules/**"
 	],
-	"words": [
-	],
-	"dictionaries": [
-		"typescript",
-		"softwareTerms",
-		"node",
-		"en_US",
-		"npm",
-		"misc",
-		"filetypes"
-	]
+	"words": [],
+	"dictionaries": ["typescript", "softwareTerms", "node", "en_US", "npm", "misc", "filetypes"]
 }

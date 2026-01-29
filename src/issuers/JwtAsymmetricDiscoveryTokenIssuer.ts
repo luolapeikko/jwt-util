@@ -1,8 +1,8 @@
-import * as path from 'path';
+import * as path from 'node:path';
 import {ExpireCache} from '@avanio/expire-cache';
-import {type IAsyncCache} from '@luolapeikko/cache-types';
-import {type IJwtKeys} from '../interfaces/JwtKeys';
-import {type IOpenIdConfigCache} from '../interfaces/OpenIdConfig';
+import type {IAsyncCache} from '@luolapeikko/cache-types';
+import type {IJwtKeys} from '../interfaces/JwtKeys';
+import type {IOpenIdConfigCache} from '../interfaces/OpenIdConfig';
 import {buildCertFrame, rsaPublicKeyPem} from '../lib/rsaPublicKeyPem';
 import {type IJwtAsymmetricTokenIssuerProps, JwtAsymmetricTokenIssuer} from './JwtAsymmetricTokenIssuer';
 
@@ -81,11 +81,11 @@ export class JwtAsymmetricDiscoveryTokenIssuer extends JwtAsymmetricTokenIssuer 
 		const url = new URL(issuerUrl);
 		url.pathname = path.join(url.pathname, '/.well-known/openid-configuration');
 		const req = new Request(url.toString());
-		this.logger?.debug('fetch openid-configuration: ' + req.url);
+		this.logger?.debug(`fetch openid-configuration: ${req.url}`);
 		const res = await fetch(req);
 		if (!res.ok) {
-			this.logger?.error('fetch error: ' + res.statusText);
-			throw new Error('fetch error: ' + res.statusText);
+			this.logger?.error(`fetch error: ${res.statusText}`);
+			throw new Error(`fetch error: ${res.statusText}`);
 		}
 		const configCache = (await res.json()) as IOpenIdConfigCache;
 		await this.discoveryCache.set(issuerUrl, configCache);

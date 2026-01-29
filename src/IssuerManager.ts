@@ -1,6 +1,6 @@
-import {type ILoggerLike} from '@avanio/logger-like';
-import {type IIssuerManager} from './interfaces/IIssuerManager';
-import {type IJwtTokenIssuer} from './interfaces/IJwtTokenIssuer';
+import type {ILoggerLike} from '@avanio/logger-like';
+import type {IIssuerManager} from './interfaces/IIssuerManager';
+import type {IJwtTokenIssuer} from './interfaces/IJwtTokenIssuer';
 
 interface IIssuerManagerOptions {
 	logger?: ILoggerLike;

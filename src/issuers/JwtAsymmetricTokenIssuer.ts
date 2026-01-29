@@ -1,6 +1,6 @@
-import {type ILoggerLike} from '@avanio/logger-like';
-import {type CertAsymmetricIssuer, type CertAsymmetricIssuerFile, type CertSymmetricIssuer} from '../interfaces/IJwtCertStore';
-import {type IJwtTokenAsymmetricIssuer} from '../interfaces/IJwtTokenIssuer';
+import type {ILoggerLike} from '@avanio/logger-like';
+import type {CertAsymmetricIssuer, CertAsymmetricIssuerFile, CertSymmetricIssuer} from '../interfaces/IJwtCertStore';
+import type {IJwtTokenAsymmetricIssuer} from '../interfaces/IJwtTokenIssuer';
 
 /**
  * Returns a function that takes a string or RegExp and returns true if the

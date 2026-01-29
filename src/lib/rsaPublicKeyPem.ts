@@ -39,13 +39,13 @@ export const buildCertFrame = (der: string): Buffer => {
 	if (!match) {
 		throw new Error('Cert data error');
 	}
-	return Buffer.from('-----BEGIN RSA PUBLIC KEY-----\r\n' + match.join('\r\n') + '\r\n-----END RSA PUBLIC KEY-----\r\n');
+	return Buffer.from(`-----BEGIN RSA PUBLIC KEY-----\r\n${match.join('\r\n')}\r\n-----END RSA PUBLIC KEY-----\r\n`);
 };
 
 function prePadSigned(hexStr: string) {
 	const msb = hexStr[0];
 	if (msb !== undefined && (msb < '0' || msb > '7')) {
-		return '00' + hexStr;
+		return `00${hexStr}`;
 	} else {
 		return hexStr;
 	}
@@ -60,7 +60,7 @@ function prePadSigned(hexStr: string) {
 function toHex(numberValue: number) {
 	const nStr = numberValue.toString(16);
 	if (nStr.length % 2) {
-		return '0' + nStr;
+		return `0${nStr}`;
 	}
 	return nStr;
 }

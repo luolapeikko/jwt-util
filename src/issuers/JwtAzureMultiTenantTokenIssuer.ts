@@ -1,5 +1,5 @@
-import {type CertAsymmetricIssuerFile, type CertSymmetricIssuer} from '../interfaces/IJwtCertStore';
-import {type IJwtTokenAsymmetricIssuer} from '../interfaces/IJwtTokenIssuer';
+import type {CertAsymmetricIssuerFile, CertSymmetricIssuer} from '../interfaces/IJwtCertStore';
+import type {IJwtTokenAsymmetricIssuer} from '../interfaces/IJwtTokenIssuer';
 import {type IJwtAsymmetricDiscoveryTokenIssuerProps, JwtAsymmetricDiscoveryTokenIssuer} from './JwtAsymmetricDiscoveryTokenIssuer';
 
 interface IJwtAzureMultiTenantTokenIssuerProps extends IJwtAsymmetricDiscoveryTokenIssuerProps {
@@ -49,11 +49,9 @@ export class JwtAzureMultiTenantTokenIssuer implements IJwtTokenAsymmetricIssuer
 	}
 
 	public toJSON(): Record<string, CertAsymmetricIssuerFile> {
-		return Array.from(this.azureIssuers.values()).reduce<Record<string, CertAsymmetricIssuerFile>>((last, issuer) => {
-			return {
-				...last,
-				...issuer.toJSON(),
-			};
+		return Array.from(this.azureIssuers.values()).reduce<Record<string, CertAsymmetricIssuerFile>>((acc, issuer) => {
+			Object.assign(acc, issuer.toJSON());
+			return acc;
 		}, {});
 	}
 

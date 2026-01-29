@@ -5,7 +5,7 @@ import {IssuerManager, JwtAsymmetricDiscoveryTokenIssuer, JwtAzureMultiTenantTok
 import {getAzureAccessToken, haveAzureEnvVariables} from './lib/azure';
 import {getGoogleIdToken, haveGoogleEnvVariables} from './lib/google';
 
-dotenv.config();
+dotenv.config({quiet: true});
 
 const googleIdTokenSchema = z.object({
 	aud: z.string(),

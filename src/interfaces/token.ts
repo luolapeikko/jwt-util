@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type * as jwt from 'jsonwebtoken';
 
 export type TokenPayload<T = Record<string, any>> = jwt.JwtPayload & T;

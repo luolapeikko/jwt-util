@@ -23,7 +23,7 @@
 		"noUncheckedIndexedAccess": true,
 		"strict": true,
 		"strictBindCallApply": true,
-		"noImplicitOverride":  true
+		"noImplicitOverride": true
 	},
 	"include": ["src"],
 	"exclude": ["node_modules", "test"]

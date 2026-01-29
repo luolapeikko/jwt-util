@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 import {describe, expect, it} from 'vitest';
 import {IssuerManager, JwtAsymmetricDiscoveryTokenIssuer, JwtAsymmetricTokenIssuer, JwtSymmetricTokenIssuer} from '../src';
 
-dotenv.config();
+dotenv.config({quiet: true});
 
 const issuerUrl = 'http://localhost';
 

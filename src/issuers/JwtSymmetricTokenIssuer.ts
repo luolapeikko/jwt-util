@@ -1,5 +1,5 @@
-import {type CertSymmetricIssuer} from '../interfaces/IJwtCertStore';
-import {type IJwtTokenSymmetricIssuer} from '../interfaces/IJwtTokenIssuer';
+import type {CertSymmetricIssuer} from '../interfaces/IJwtCertStore';
+import type {IJwtTokenSymmetricIssuer} from '../interfaces/IJwtTokenIssuer';
 
 export class JwtSymmetricTokenIssuer implements IJwtTokenSymmetricIssuer {
 	public readonly type = 'symmetric';

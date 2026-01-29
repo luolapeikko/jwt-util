@@ -1,4 +1,4 @@
-import {google} from 'googleapis';
+import {JWT} from 'google-auth-library';
 import {azureMultilineEnvFix} from './common';
 
 /**
@@ -17,13 +17,11 @@ export function haveGoogleEnvVariables() {
 function getAccessToken(): Promise<string> {
 	const clientKey = azureMultilineEnvFix(process.env.GOOGLE_CLIENT_KEY);
 	return new Promise((resolve, reject) => {
-		const jwtClient = new google.auth.JWT(
-			process.env.GOOGLE_CLIENT_EMAIL,
-			undefined,
-			clientKey,
-			['openid', 'https://www.googleapis.com/auth/cloud-platform'],
-			undefined,
-		);
+		const jwtClient = new JWT({
+			email: process.env.GOOGLE_CLIENT_EMAIL,
+			key: clientKey, // multiline private key
+			scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+		});
 		jwtClient.authorize((err, cred) => {
 			if (err) {
 				reject(err);
@@ -49,7 +47,7 @@ export async function getGoogleIdToken() {
 		includeEmail: true,
 	});
 	const headers = new Headers();
-	headers.set('Authorization', 'Bearer ' + (await getAccessToken()));
+	headers.set('Authorization', `Bearer ${await getAccessToken()}`);
 	headers.set('Content-Type', 'application/json');
 	headers.set('Content-Length', body.length.toString());
 	const res = await fetch(`https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/${String(process.env.GOOGLE_CLIENT_EMAIL)}:generateIdToken`, {
@@ -58,6 +56,7 @@ export async function getGoogleIdToken() {
 		method: 'POST',
 	});
 	if (res.status !== 200) {
+		console.log((await res.json()).error);
 		throw new Error(`getGoogleIdToken code ${res.status.toString()}`);
 	}
 	const data = (await res.json()) as {token: string};

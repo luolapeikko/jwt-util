@@ -1,15 +1,15 @@
-import {EventEmitter} from 'events';
+import {EventEmitter} from 'node:events';
 import {ExpireCache} from '@avanio/expire-cache';
-import {type ILoggerLike} from '@avanio/logger-like';
+import type {ILoggerLike} from '@avanio/logger-like';
 import {AuthHeader, isAuthHeaderString} from '@luolapeikko/auth-header';
-import {type IAsyncCache, type IAsyncCacheWithEvents} from '@luolapeikko/cache-types';
+import type {IAsyncCache, IAsyncCacheWithEvents} from '@luolapeikko/cache-types';
 import {decode, type Jwt, type JwtPayload, type VerifyOptions} from 'jsonwebtoken';
-import {type IIssuerManager} from './interfaces/IIssuerManager';
-import {type JwtResponse} from './interfaces/JwtResponse';
-import {jwtVerifyPromise} from './lib/jwt';
+import type {IIssuerManager} from './interfaces/IIssuerManager';
+import type {JwtResponse} from './interfaces/JwtResponse';
 import {JwtBodyError} from './lib/JwtBodyError';
 import {JwtError} from './lib/JwtError';
 import {JwtHeaderError} from './lib/JwtHeaderError';
+import {jwtVerifyPromise} from './lib/jwt';
 
 export type JwtManagerEventMapping = {
 	add: [JwtPayload];
