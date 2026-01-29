@@ -36,7 +36,7 @@ describe('JwtManager', () => {
 				new JwtAzureMultiTenantTokenIssuer({allowedIssuers: [`https://sts.windows.net/${String(process.env.AZ_TENANT_ID)}/`]}),
 				localPki,
 			]),
-		);;
+		);
 	});
 	it('should validate google id token', {skip: !haveGoogleEnvVariables()}, async () => {
 		const {isCached, body} = await jwtManager.verify(await getGoogleIdToken(), undefined, (body) => googleIdTokenSchema.strict().parse(body));
