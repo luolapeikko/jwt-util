@@ -23,7 +23,7 @@
     "files": [
         "dist"
     ],
-    "repository": "github:mharj/jwt-util",
+    "repository": "github:luolapeikko/jwt-util",
     "keywords": [
         "jwt",
         "nodejs"
@@ -31,9 +31,9 @@
     "author": "mharj",
     "license": "LGPL-2.0-only",
     "bugs": {
-        "url": "https://github.com/mharj/jwt-util/issues"
+        "url": "https://github.com/luolapeikko/jwt-util/issues"
     },
-    "homepage": "https://github.com/mharj/jwt-util#readme",
+    "homepage": "https://github.com/luolapeikko/jwt-util#readme",
     "devDependencies": {
         "@avanio/expire-cache": "^0.6.9",
         "@avanio/logger-like": "^0.2.12",
