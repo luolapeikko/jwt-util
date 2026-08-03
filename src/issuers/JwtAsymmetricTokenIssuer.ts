@@ -1,4 +1,4 @@
-import type {ILoggerLike} from '@avanio/logger-like';
+import type {ILoggerLike} from '@luolapeikko/logger-type';
 import type {CertAsymmetricIssuer, CertAsymmetricIssuerFile, CertSymmetricIssuer} from '../interfaces/IJwtCertStore';
 import type {IJwtTokenAsymmetricIssuer} from '../interfaces/IJwtTokenIssuer';
 
@@ -24,13 +24,13 @@ export interface IJwtAsymmetricTokenIssuerProps {
 }
 
 export class JwtAsymmetricTokenIssuer implements IJwtTokenAsymmetricIssuer {
-	readonly name = 'JwtAsymmetricTokenIssuer';
+	public readonly name = 'JwtAsymmetricTokenIssuer';
 	public readonly type = 'asymmetric';
 
 	protected store: Record<string, CertAsymmetricIssuer> = {};
 	protected logger?: ILoggerLike;
 	protected issuerUrls: (string | RegExp)[] = [];
-	constructor(issuerUrlRules: (string | RegExp)[], {logger}: IJwtAsymmetricTokenIssuerProps = {}) {
+	public constructor(issuerUrlRules: (string | RegExp)[], {logger}: IJwtAsymmetricTokenIssuerProps = {}) {
 		this.issuerUrls = issuerUrlRules;
 		this.logger = logger;
 		this.logger?.info(`${this.name} created for ${issuerUrlRules.length.toString()} issuers rules`);
@@ -52,8 +52,8 @@ export class JwtAsymmetricTokenIssuer implements IJwtTokenAsymmetricIssuer {
 		if (isMatch && !this.store[issuerUrl]) {
 			this.store[issuerUrl] = {
 				_ts: 0,
-				type: 'asymmetric',
 				keys: {},
+				type: 'asymmetric',
 			};
 		}
 		return isMatch;
@@ -64,8 +64,8 @@ export class JwtAsymmetricTokenIssuer implements IJwtTokenAsymmetricIssuer {
 		this.checkIssuer(issuerUrl);
 		this.store[issuerUrl] ??= {
 			_ts: 0,
-			type: this.type,
 			keys: {},
+			type: this.type,
 		};
 		this.store[issuerUrl].keys[keyId] = cert;
 		this.store[issuerUrl]._ts = Date.now();
@@ -82,13 +82,13 @@ export class JwtAsymmetricTokenIssuer implements IJwtTokenAsymmetricIssuer {
 			if (issuer.type === 'asymmetric' && this.issuerMatch(issuerUrl)) {
 				this.store[issuerUrl] = {
 					_ts: issuer._ts,
-					type: issuer.type,
 					keys: Object.entries(issuer.keys).reduce<Record<string, Buffer | undefined>>((last, [key, cert]) => {
 						if (cert) {
 							last[key] = Buffer.from(cert, 'base64'); // convert base64 to buffer
 						}
 						return last;
 					}, {}),
+					type: issuer.type,
 				};
 			}
 		});
@@ -98,11 +98,11 @@ export class JwtAsymmetricTokenIssuer implements IJwtTokenAsymmetricIssuer {
 		return Object.entries(this.store).reduce<Record<string, CertAsymmetricIssuerFile>>((last, [issuerUrl, issuer]) => {
 			last[issuerUrl] = {
 				_ts: issuer._ts,
-				type: issuer.type,
 				keys: Object.entries(issuer.keys).reduce<Record<string, string | undefined>>((last, [keyId, cert]) => {
 					last[keyId] = cert?.toString('base64'); // convert buffer to base64
 					return last;
 				}, {}),
+				type: issuer.type,
 			};
 			return last;
 		}, {});

@@ -12,7 +12,7 @@ export class JwtAzureMultiTenantTokenIssuer implements IJwtTokenAsymmetricIssuer
 
 	private props: IJwtAzureMultiTenantTokenIssuerProps;
 
-	constructor(props: IJwtAzureMultiTenantTokenIssuerProps = {}) {
+	public constructor(props: IJwtAzureMultiTenantTokenIssuerProps = {}) {
 		this.props = props;
 		this.props.logger?.info(`JwtAzureMultiTenantTokenIssuer created for ${String(this.props.allowedIssuers?.length)} issuers rules`);
 	}
@@ -35,9 +35,9 @@ export class JwtAzureMultiTenantTokenIssuer implements IJwtTokenAsymmetricIssuer
 		this.getIssuer(issuerUrl).add(issuerUrl, keyId, cert);
 	}
 
-	public async get(issuerUrl: string, keyId: string) {
+	public get(issuerUrl: string, keyId: string) {
 		this.props.logger?.debug(`${this.type} get ${issuerUrl} ${keyId}`);
-		return this.getIssuer(issuerUrl).get(issuerUrl, keyId);
+		return Promise.resolve(this.getIssuer(issuerUrl).get(issuerUrl, keyId));
 	}
 
 	public import(issuers: Record<string, CertSymmetricIssuer | CertAsymmetricIssuerFile>) {

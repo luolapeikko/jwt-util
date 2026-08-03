@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: jsonwebtoken uses any types */
 import type * as jwt from 'jsonwebtoken';
 
 export type TokenPayload<T = Record<string, any>> = jwt.JwtPayload & T;
@@ -36,13 +37,13 @@ export function isIssuerToken(decoded: unknown): decoded is FullDecodedIssuerTok
  */
 export function isTokenFullDecoded(decoded: unknown): decoded is FullDecodedTokenStructure {
 	return (
-		typeof decoded === 'object' &&
-		decoded !== null &&
-		'payload' in decoded &&
-		typeof decoded.payload === 'object' &&
-		'header' in decoded &&
-		typeof decoded.header === 'object' &&
-		'signature' in decoded &&
-		typeof decoded.signature === 'string'
+		typeof decoded === 'object'
+		&& decoded !== null
+		&& 'payload' in decoded
+		&& typeof decoded.payload === 'object'
+		&& 'header' in decoded
+		&& typeof decoded.header === 'object'
+		&& 'signature' in decoded
+		&& typeof decoded.signature === 'string'
 	);
 }

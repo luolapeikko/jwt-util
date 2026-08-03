@@ -1,4 +1,4 @@
-import type {ILoggerLike} from '@avanio/logger-like';
+import type {ILoggerLike} from '@luolapeikko/logger-type';
 import type {IIssuerManager} from './interfaces/IIssuerManager';
 import type {IJwtTokenIssuer} from './interfaces/IJwtTokenIssuer';
 
@@ -18,7 +18,7 @@ interface IIssuerManagerOptions {
 export class IssuerManager implements IIssuerManager {
 	private issuers: Set<IJwtTokenIssuer>;
 	private options: IIssuerManagerOptions;
-	constructor(issuers: IJwtTokenIssuer[] | Set<IJwtTokenIssuer> = [], options: IIssuerManagerOptions = {}) {
+	public constructor(issuers: IJwtTokenIssuer[] | Set<IJwtTokenIssuer> = [], options: IIssuerManagerOptions = {}) {
 		this.issuers = new Set(issuers);
 		this.options = options;
 	}

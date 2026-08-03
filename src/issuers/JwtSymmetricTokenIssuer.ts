@@ -4,7 +4,7 @@ import type {IJwtTokenSymmetricIssuer} from '../interfaces/IJwtTokenIssuer';
 export class JwtSymmetricTokenIssuer implements IJwtTokenSymmetricIssuer {
 	public readonly type = 'symmetric';
 	private store: Record<string, CertSymmetricIssuer>;
-	constructor(issuerUrl: string[]) {
+	public constructor(issuerUrl: string[]) {
 		this.store = issuerUrl.reduce<Record<string, CertSymmetricIssuer>>((last, issuer) => {
 			last[issuer] = {
 				_ts: 0,

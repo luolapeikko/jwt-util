@@ -22,14 +22,14 @@ export function rsaPublicKeyPem(modulusB64: string, exponentB64: string): string
 	const encodedModLen = encodeLengthHex(modLen);
 	const encodedExpLen = encodeLengthHex(expLen);
 	const encodedPubkey =
-		'30' +
-		encodeLengthHex(modLen + expLen + encodedModLen.length / 2 + encodedExpLen.length / 2 + 2) +
-		'02' +
-		encodedModLen +
-		modulusHex +
-		'02' +
-		encodedExpLen +
-		exponentHex;
+		'30'
+		+ encodeLengthHex(modLen + expLen + encodedModLen.length / 2 + encodedExpLen.length / 2 + 2)
+		+ '02'
+		+ encodedModLen
+		+ modulusHex
+		+ '02'
+		+ encodedExpLen
+		+ exponentHex;
 
 	return Buffer.from(encodedPubkey, 'hex').toString('base64').toString();
 }

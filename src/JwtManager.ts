@@ -1,8 +1,7 @@
 import {EventEmitter} from 'node:events';
 import {ExpireCache} from '@avanio/expire-cache';
-import type {ILoggerLike} from '@avanio/logger-like';
-import {AuthHeader, isAuthHeaderString} from '@luolapeikko/auth-header';
 import type {IAsyncCache, IAsyncCacheWithEvents} from '@luolapeikko/cache-types';
+import type {ILoggerLike} from '@luolapeikko/logger-type';
 import {decode, type Jwt, type JwtPayload, type VerifyOptions} from 'jsonwebtoken';
 import type {IIssuerManager} from './interfaces/IIssuerManager';
 import type {JwtResponse} from './interfaces/JwtResponse';
@@ -62,12 +61,7 @@ export class JwtManager extends EventEmitter<JwtManagerEventMapping> {
 		jwtBodyValidation?: (jwtBody: unknown) => T,
 	): Promise<JwtResponse<T>> {
 		try {
-			const currentToken = isAuthHeaderString(tokenOrBearer) ? AuthHeader(tokenOrBearer).unwrap() : tokenOrBearer;
-			// only allow bearer as auth type
-			if (typeof currentToken !== 'string' && currentToken.scheme !== 'BEARER') {
-				throw new JwtHeaderError('token header: wrong authentication header type');
-			}
-			const token = typeof currentToken === 'string' ? currentToken : currentToken.getCredentials();
+			const token = tokenOrBearer.replace(/^(Bearer|bearer)\s+/, '');
 			const cached = (await this.cache.get(token)) as (T & JwtPayload) | undefined;
 			if (cached) {
 				return {body: cached, isCached: true};
@@ -110,6 +104,6 @@ export class JwtManager extends EventEmitter<JwtManagerEventMapping> {
 		if (!iss) {
 			throw new JwtBodyError('token body: missing iss parameter');
 		}
-		return {kid, iss};
+		return {iss, kid};
 	}
 }

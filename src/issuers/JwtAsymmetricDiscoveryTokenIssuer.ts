@@ -14,7 +14,7 @@ export class JwtAsymmetricDiscoveryTokenIssuer extends JwtAsymmetricTokenIssuer 
 	public override readonly type = 'asymmetric';
 	private discoveryCache: IAsyncCache<IOpenIdConfigCache>;
 
-	constructor(issuerUrlRules: (string | RegExp)[], {discoveryCache, ...props}: IJwtAsymmetricDiscoveryTokenIssuerProps = {}) {
+	public constructor(issuerUrlRules: (string | RegExp)[], {discoveryCache, ...props}: IJwtAsymmetricDiscoveryTokenIssuerProps = {}) {
 		super(issuerUrlRules, props);
 		this.discoveryCache = discoveryCache ?? new ExpireCache<IOpenIdConfigCache>(undefined, undefined, 86400000); // 24h
 	}
