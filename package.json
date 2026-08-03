@@ -1,6 +1,6 @@
 {
   "name": "@avanio/jwt-util",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "NodeJS JWT utils",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -24,9 +24,14 @@
     "lint": "biome check",
     "validate": "tsc --noEmit"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "repository": "github:luolapeikko/jwt-util",
-  "keywords": ["jwt", "nodejs"],
+  "keywords": [
+    "jwt",
+    "nodejs"
+  ],
   "author": "mharj",
   "license": "LGPL-2.0-only",
   "bugs": {
