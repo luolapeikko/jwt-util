@@ -1,30 +1,9 @@
 {
+  "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "module": "preserve",
-    "target": "ES2020",
-    "lib": ["ES2020", "dom"],
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "moduleResolution": "bundler",
-    "sourceRoot": "./src",
-    "types": ["node"],
-    "declaration": true,
-    "removeComments": false,
-    "sourceMap": false,
-    "inlineSources": true,
-    "inlineSourceMap": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "importHelpers": false,
-    "strictNullChecks": true,
-    "noUnusedLocals": true,
-    "noUncheckedIndexedAccess": true,
-    "strict": true,
-    "strictBindCallApply": true,
-    "noImplicitOverride": true
+    "rootDir": "./"
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "test"]
+  "importHelpers": false,
+  "include": ["src", "test"],
+  "exclude": ["node_modules"]
 }

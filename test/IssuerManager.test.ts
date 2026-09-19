@@ -35,6 +35,9 @@ describe('IssuerManager', () => {
 		expect(issuerManager.issuerSolverCount('http://localhost2')).to.be.eq(0);
 		await issuer.load('https://accounts.google.com');
 		const keyIds = await issuer.listKeyIds('https://accounts.google.com');
+		if(!keyIds[0]) {
+			throw new Error('No key IDs found for issuer https://accounts.google.com');
+		}
 		expect(keyIds.length).to.be.greaterThan(0);
 		const buffer = await issuerManager.get('https://accounts.google.com', keyIds[0]);
 		expect(buffer).to.be.instanceOf(Buffer);
