@@ -24,14 +24,9 @@
     "lint": "biome check",
     "validate": "tsc --noEmit"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "repository": "github:luolapeikko/jwt-util",
-  "keywords": [
-    "jwt",
-    "nodejs"
-  ],
+  "keywords": ["jwt", "nodejs"],
   "author": "mharj",
   "license": "LGPL-2.0-only",
   "bugs": {
