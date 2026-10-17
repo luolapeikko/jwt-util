@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: "monthly"
     groups:
-      monthly-batch:
+      actions-batch:
         patterns:
           - "*"
   - package-ecosystem: "npm"
